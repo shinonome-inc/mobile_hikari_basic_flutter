@@ -79,18 +79,21 @@ class _MainPageState extends State<MainPage> {
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: TextField(
                 enabled: true,
-                style: const TextStyle(color: Colors.red),
+                style: const TextStyle(color: Colors.black),
                 obscureText: false,
                 maxLines: 1,
                 onChanged: onChanged,
               ),
+            ),
+            const SizedBox(
+              height: 32,
+            ),
+            ElevatedButton(
+              onPressed: onClicked,
+              child: const Text('RUN'),
             )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: onClicked,
-        child: const Text("RUN"),
       ),
     );
   }
