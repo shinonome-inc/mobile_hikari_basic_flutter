@@ -5,10 +5,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key})
-      : super(key: key); // Use 'Key?' instead of 'super.key'.
+  const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,10 +29,11 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  late String seireki; // Initialize seireki with a default value of 0.
+  late String seireki;
   String res = "";
+  final String errorMessage = "Error";
 
-  bool isLeapYear(int number) {
+  static bool isLeapYear(int number) {
     if (number % 100 == 0 && number % 400 != 0) {
       return false;
     } else if (number % 4 == 0) {
@@ -44,22 +43,17 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
-  String assignSeireki(int seireki) {
-    if (isLeapYear(seireki)) {
-      return "$seireki is Leap Year";
-    } else {
-      return "$seireki is not Leap Year";
-    }
-  }
-
   void onClicked() {
     if (int.tryParse(seireki) != null) {
+      int parsedSeireki = int.parse(seireki);
       setState(() {
-        res = assignSeireki(int.parse(seireki));
+        res = isLeapYear(parsedSeireki)
+            ? "$parsedSeireki is Leap Year"
+            : "$parsedSeireki is not Leap Year";
       });
     } else {
       setState(() {
-        res = "Error";
+        res = errorMessage;
       });
     }
   }
@@ -81,13 +75,16 @@ class _MainPageState extends State<MainPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(res),
-            TextField(
-              enabled: true,
-              style: const TextStyle(color: Colors.red),
-              obscureText: false,
-              maxLines: 1,
-              onChanged: onChanged,
-            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              child: TextField(
+                enabled: true,
+                style: const TextStyle(color: Colors.red),
+                obscureText: false,
+                maxLines: 1,
+                onChanged: onChanged,
+              ),
+            )
           ],
         ),
       ),
