@@ -12,26 +12,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Leap Year Algorithm App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MainPage(title: 'Main Page'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class MainPage extends StatefulWidget {
+  const MainPage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int seireki = 0; // Initialize seireki with a default value of 0.
+class _MainPageState extends State<MainPage> {
+  late String seireki; // Initialize seireki with a default value of 0.
   String res = "";
 
   bool isLeapYear(int number) {
@@ -44,21 +44,30 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  String assignString(int number) {
-    if (isLeapYear(number)) {
-      return "$number is Leap Year";
+  String assignSeireki(int seireki) {
+    if (isLeapYear(seireki)) {
+      return "$seireki is Leap Year";
     } else {
-      return "$number is not Leap Year";
+      return "$seireki is not Leap Year";
     }
   }
 
-  void onButtonClicked() {
-    // You can access the value of 'seireki' here.
+  void onClicked() {
+    if (int.tryParse(seireki) != null) {
+      setState(() {
+        res = assignSeireki(int.parse(seireki));
+      });
+    } else {
+      setState(() {
+        res = "Error";
+      });
+    }
+  }
+
+  void onChanged(String value) {
     setState(() {
-      res = assignString(
-          seireki); // Trigger a rebuild of the widget tree with the updated value.
+      seireki = value;
     });
-    print(res);
   }
 
   @override
@@ -77,16 +86,13 @@ class _MyHomePageState extends State<MyHomePage> {
               style: const TextStyle(color: Colors.red),
               obscureText: false,
               maxLines: 1,
-              onChanged: (value) {
-                // Call the getSeireki function and store its return value in 'seireki'.
-                seireki = int.parse(value);
-              },
+              onChanged: onChanged,
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: onButtonClicked,
+        onPressed: onClicked,
         child: const Text("RUN"),
       ),
     );
