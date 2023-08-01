@@ -60,8 +60,6 @@ class _MainPageState extends State<MainPage> {
       } else if (handCp == 2) {
         handCpString = "paper";
       } else {
-        print("system error");
-
         return;
       }
 
@@ -74,8 +72,6 @@ class _MainPageState extends State<MainPage> {
         handYou = 2;
       } else {
         handYou = 99;
-        print("Your hand is invalid");
-
         return;
       }
 
