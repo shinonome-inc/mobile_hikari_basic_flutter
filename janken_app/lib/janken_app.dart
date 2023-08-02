@@ -41,10 +41,9 @@ class _MainPageState extends State<MainPage> {
       });
     }
 
-    void janken(String hand) {
+    void janken(int handYou) {
       final handCp = math.Random().nextInt(3);
       String handCpString;
-      int handYou;
 
       vanish();
 
@@ -56,18 +55,6 @@ class _MainPageState extends State<MainPage> {
       } else if (handCp == 2) {
         handCpString = "paper";
       } else {
-        return;
-      }
-
-      // 入力された手を数値として変数に格納
-      if (hand == "rock") {
-        handYou = 0;
-      } else if (hand == "scissors") {
-        handYou = 1;
-      } else if (hand == "paper") {
-        handYou = 2;
-      } else {
-        handYou = 99;
         return;
       }
 
@@ -111,7 +98,7 @@ class _MainPageState extends State<MainPage> {
                       width: 100,
                       height: 100,
                       child: IconButton(
-                        onPressed: () => janken("rock"),
+                        onPressed: () => janken(0),
                         icon: Image.asset("images/rock.png"),
                       ),
                     ),
@@ -120,7 +107,7 @@ class _MainPageState extends State<MainPage> {
                       width: 100,
                       height: 100,
                       child: IconButton(
-                        onPressed: () => janken("scissors"),
+                        onPressed: () => janken(1),
                         icon: Image.asset("images/scissors.png"),
                       ),
                     ),
@@ -129,7 +116,7 @@ class _MainPageState extends State<MainPage> {
                       width: 100,
                       height: 100,
                       child: IconButton(
-                        onPressed: () => janken("paper"),
+                        onPressed: () => janken(2),
                         icon: Image.asset("images/paper.png"),
                       ),
                     ),
