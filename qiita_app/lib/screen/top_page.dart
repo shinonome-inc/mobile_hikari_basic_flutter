@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:qiita_app/screen/pages.dart';
 
 class TopPage extends StatelessWidget {
   const TopPage({Key? key, required this.title}) : super(key: key);
@@ -56,7 +57,16 @@ class TopPage extends StatelessWidget {
                           const Color(0xFF468300),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Pages(
+                              title: 'Feed',
+                            ),
+                          ),
+                        );
+                      },
                       child: const Text(
                         "ログイン",
                         style: TextStyle(
